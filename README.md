@@ -4,4 +4,5 @@
 3. Open the cloned repo in Explorer 
 4. And start coding by opening the project file in #3 inside IntelliJ
 
+# Project Gantt Chart
 <image src="OOPGC-Latest-1.jpg"/>
