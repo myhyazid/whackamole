@@ -1,11 +1,15 @@
 package com.crimson.whackamole;
 
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -37,14 +41,16 @@ public class Game {
         }
 
 
-
+        Group root = new Group();
         GridPane gpGame = new GridPane();
         stage.setTitle("My New Stage Title");
-        stage.setScene(new Scene(gpGame, 1366, 768));
-
         gpGame.setHgap(10);
         gpGame.setVgap(10);
         gpGame.setAlignment(Pos.CENTER);
+        stage.setScene(new Scene(root, 1366, 768, Color.WHITE));
+        root.getChildren().add(gpGame);
+
+
 
         GroupofHoles goh = new GroupofHoles();
         for (int i=0;i<4;i++){
@@ -75,12 +81,12 @@ public class Game {
         //System.out.println(goh.getNumofHoles());
         //System.out.println(goh.getListofHoles(15).getPosition().getY()+","+goh.getListofHoles(15).getPosition().getX());
         for (int i=0;i<4;i++){
-            Image image = new Image(getClass().getResourceAsStream("sprites/Hole-256x256.png"));
+            Image image = new Image(getClass().getResourceAsStream("sprites/Hole-128x128.png"));
             Label lb = new Label();
             lb.setGraphic(new ImageView(image));
             gpGame.add(lb,0,i,1,1);
             for (int j=0;j<4;j++){
-                Image imageCol = new Image(getClass().getResourceAsStream("sprites/Hole-256x256.png"));
+                Image imageCol = new Image(getClass().getResourceAsStream("sprites/Hole-128x128.png"));
                 Label lbCol = new Label();
                 lbCol.setGraphic(new ImageView(imageCol));
                 gpGame.add(lbCol,j,i,1,1);
