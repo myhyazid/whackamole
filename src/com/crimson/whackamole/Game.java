@@ -14,7 +14,10 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Game {
     String HighScore = "0";
@@ -49,6 +52,9 @@ public class Game {
         gpGame.setAlignment(Pos.CENTER);
         stage.setScene(new Scene(root, 1366, 768, Color.WHITE));
         root.getChildren().add(gpGame);
+        root.setTranslateX(400);
+        root.setTranslateY(100);
+        stage.resizableProperty().setValue(Boolean.FALSE);
 
 
 
@@ -94,7 +100,32 @@ public class Game {
 
         }
 
+        Random random = new Random();
+        GroupofNPC gon = new GroupofNPC();
 
+        for (int i=0;i<3;i++){
+            NPC bot = new NPC();
+            bot.setID(i);
+            if (i==0){
+                bot.setName("Normal");
+                bot.setAddTime(0);
+                bot.setScore(50);
+            }
+            else if (i==1){
+                bot.setName("Special");
+                bot.setAddTime(50);
+                bot.setScore(150);
+            }
+            else if (i==2){
+                bot.setName("TimeBomb");
+                bot.setAddTime(-50);
+                bot.setScore(-10);
+            }
+            gon.addNPC(bot);
+
+        }
+       
+        goh.getListofHoles(random.nextInt(16)).setOccupant(gon.getListofNPC(random.nextInt(3)));
 
     }
 
