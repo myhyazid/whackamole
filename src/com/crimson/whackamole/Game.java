@@ -1,12 +1,17 @@
 package com.crimson.whackamole;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -17,6 +22,9 @@ import java.util.Scanner;
 
 public class Game {
     String HighScore = "0";
+    int score;
+
+
 
     public String getHighScore() {
         return HighScore;
@@ -28,7 +36,6 @@ public class Game {
 
 
     public Stage stage = new Stage();
-
     public Game(){
         try {
             Scanner scanner = new Scanner(new File("C:\\Users\\myhyazid\\Desktop\\Bachelor Of Technology\\Sem 2\\OOP Submission\\whackamole\\src\\com\\crimson\\whackamole\\HighScore.txt"));
@@ -44,18 +51,37 @@ public class Game {
     public void initGUI(){
 
 
-        Group root = new Group();
+        StackPane root = new StackPane();
+        root.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
+        GridPane gpHeader = new GridPane();
         GridPane gpGame = new GridPane();
         stage.setTitle("My New Stage Title");
         gpGame.setHgap(10);
         gpGame.setVgap(10);
+        gpGame.setTranslateY(100.0);
         gpGame.setAlignment(Pos.CENTER);
+
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(30);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(25);
+        ColumnConstraints column3 = new ColumnConstraints();
+        column3.setPercentWidth(25);
+        ColumnConstraints column4 = new ColumnConstraints();
+        column4.setPercentWidth(20);
+
+        gpHeader.getColumnConstraints().addAll(column1, column2,column3,column4);
+
         stage.setScene(new Scene(root, 1366, 768, Color.WHITE));
+
+        root.getChildren().add(gpHeader);
         root.getChildren().add(gpGame);
-        root.setTranslateX(400);
-        root.setTranslateY(100);
+
         stage.resizableProperty().setValue(Boolean.FALSE);
 
+        //DEBUG
+        gpHeader.setStyle("-fx-background-color: green;");
+        gpGame.setStyle("-fx-background-color: red;");
 
 
         GroupofHoles goh = new GroupofHoles();
@@ -84,8 +110,8 @@ public class Game {
             }
 
         }
-        //System.out.println(goh.getNumofHoles());
-        //System.out.println(goh.getListofHoles(15).getPosition().getY()+","+goh.getListofHoles(15).getPosition().getX());
+        //System.out.println(goh.getListofHoles(15).getPosition()
+        //        //System.out.println(goh.getNumofHoles());.getY()+","+goh.getListofHoles(15).getPosition().getX());
         for (int i=0;i<4;i++){
             Image image = new Image(getClass().getResourceAsStream("sprites/Hole-128x128.png"));
             Label lb = new Label();
@@ -125,11 +151,36 @@ public class Game {
 
         }
 
+
+
+        //Header
+
         CountdownTimer FTM = new CountdownTimer();
-        Label lbtimer = new Label();
+        Label lblScore = new Label("Score : " + score);
+        Label lblTimer = new Label("Time Left : ");
+        Button btnPause = new Button("Pause ☰");
+        lblScore.setTextFill(Color.RED);
+        lblScore.setStyle("-fx-font-size: 4em;");
+
+        lblTimer.setTextFill(Color.RED);
+        lblTimer.setStyle("-fx-font-size: 4em;");
+        lblTimer.setAlignment(Pos.CENTER);
+
+        btnPause.setAlignment(Pos.CENTER_RIGHT);
+        btnPause.setStyle("-fx-font-size: 3em;");
+
+       // btnPause.setStyle("-fx-font-size: 4em;");
+        btnPause.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hi");
+            }
+        });
         FTM.call();
-        gpGame.add(FTM.timerLabel,1,5,1,1);
-        System.out.println(lbtimer.getText());
+        gpHeader.add(lblScore,0,0,1,1);
+        gpHeader.add(lblTimer,1,0,1,1);
+        gpHeader.add(FTM.timerLabel,2,0,1,1);
+        gpHeader.add(btnPause,3,0,1,1);
 
         goh.getListofHoles(random.nextInt(16)).setOccupant(gon.getListofNPC(random.nextInt(3)));
 
