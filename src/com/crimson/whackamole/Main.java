@@ -56,6 +56,7 @@ public class Main extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                g.initGUI();
                 g.stage.show();
                 // Hide this current window (if this is what you want)
                 ((Node)(event.getSource())).getScene().getWindow().hide();

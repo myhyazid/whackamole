@@ -1,7 +1,6 @@
 package com.crimson.whackamole;
 
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -9,15 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Game {
     String HighScore = "0";
@@ -32,6 +28,7 @@ public class Game {
 
 
     public Stage stage = new Stage();
+
     public Game(){
         try {
             Scanner scanner = new Scanner(new File("C:\\Users\\myhyazid\\Desktop\\Bachelor Of Technology\\Sem 2\\OOP Submission\\whackamole\\src\\com\\crimson\\whackamole\\HighScore.txt"));
@@ -42,6 +39,9 @@ public class Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void initGUI(){
 
 
         Group root = new Group();
@@ -124,7 +124,13 @@ public class Game {
             gon.addNPC(bot);
 
         }
-       
+
+        CountdownTimer FTM = new CountdownTimer();
+        Label lbtimer = new Label();
+        FTM.call();
+        gpGame.add(FTM.timerLabel,1,5,1,1);
+        System.out.println(lbtimer.getText());
+
         goh.getListofHoles(random.nextInt(16)).setOccupant(gon.getListofNPC(random.nextInt(3)));
 
     }
