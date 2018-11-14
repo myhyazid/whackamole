@@ -214,18 +214,18 @@ public class Game  {
                                lb.setGraphic(new ImageView(image));
                                gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
                            }
-                    /*else if (randNPC==1){
+                    else if (randNPC==1){
                         Image image = new Image(getClass().getResourceAsStream("sprites/NPC1-128x128.png"));
                         Label lb = new Label();
                         lb.setGraphic(new ImageView(image));
                         gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
                     }
                     else if (randNPC==2){
-                        Image image = new Image(getClass().getResourceAsStream("sprites/NPC2-128x128.png"));
+                        Image image = new Image(getClass().getResourceAsStream("sprites/NPC2-128x128.png"),128,128,false,false);
                         Label lb = new Label();
                         lb.setGraphic(new ImageView(image));
                         gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
-                    }*/
+                    }
                            else {
                                Image image = new Image(getClass().getResourceAsStream("sprites/Hole-128x128.png"));
                                Label lb = new Label();
