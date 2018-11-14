@@ -1,5 +1,7 @@
 package com.crimson.whackamole;
 
+import com.sun.istack.internal.Nullable;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -179,52 +182,71 @@ public class Game  {
                 System.out.println("Hi");
             }
         });
-        FTM.call();
+        FTM.callCountDown();
         gpHeader.add(lblScore,0,0,1,1);
         gpHeader.add(lblTimer,1,0,1,1);
         gpHeader.add(FTM.timerLabel,2,0,1,1);
         gpHeader.add(btnPause,3,0,1,1);
 
-        for (int i=0;i<16;i++) {
-            int randHole = random.nextInt(16);
-            int randNPC = random.nextInt(3);
-            goh.getListofHoles(randHole).setOccupant(gon.getListofNPC(randNPC));
+      // for (int i=0;i<16;i++) {
+           // boolean repeat;
+            //do{
 
-            if (randNPC==0){
-                Image image = new Image(getClass().getResourceAsStream("sprites/128x128.png"));
-                Label lb = new Label();
-                lb.setGraphic(new ImageView(image));
-                gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
-            }
-            /*else if (randNPC==1){
-                Image image = new Image(getClass().getResourceAsStream("sprites/NPC1-128x128.png"));
-                Label lb = new Label();
-                lb.setGraphic(new ImageView(image));
-                gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
-            }
-            else if (randNPC==2){
-                Image image = new Image(getClass().getResourceAsStream("sprites/NPC2-128x128.png"));
-                Label lb = new Label();
-                lb.setGraphic(new ImageView(image));
-                gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
-            }*/
-            else {
-                Image image = new Image(getClass().getResourceAsStream("sprites/Hole-128x128.png"));
-                Label lb = new Label();
-                lb.setGraphic(new ImageView(image));
-                gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
-            }
 
-            /*try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
+           final Timer t = new Timer(2000,null);
+           t.addActionListener(new ActionListener(){
+               int i=0;
+               public void actionPerformed(java.awt.event.ActionEvent e){
+
+
+                   Platform.runLater(new Runnable() {
+                       @Override
+                       public void run() {
+                           int randHole = random.nextInt(16);
+                           int randNPC = random.nextInt(3);
+                           goh.getListofHoles(randHole).setOccupant(gon.getListofNPC(randNPC));
+
+                           //CountdownTimer.callNPCTimer NPCTime = new CountdownTimer.callNPCTimer();
+
+                           if (randNPC==0){
+                               Image image = new Image(getClass().getResourceAsStream("sprites/128x128.png"));
+                               Label lb = new Label();
+                               lb.setGraphic(new ImageView(image));
+                               gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
+                           }
+                    /*else if (randNPC==1){
+                        Image image = new Image(getClass().getResourceAsStream("sprites/NPC1-128x128.png"));
+                        Label lb = new Label();
+                        lb.setGraphic(new ImageView(image));
+                        gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
+                    }
+                    else if (randNPC==2){
+                        Image image = new Image(getClass().getResourceAsStream("sprites/NPC2-128x128.png"));
+                        Label lb = new Label();
+                        lb.setGraphic(new ImageView(image));
+                        gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
+                    }*/
+                           else {
+                               Image image = new Image(getClass().getResourceAsStream("sprites/Hole-128x128.png"));
+                               Label lb = new Label();
+                               lb.setGraphic(new ImageView(image));
+                               gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
+                           }
+                           //javaFX operations should go here
+                       }
+                   });
+
+
+                   if(i>25){t.stop();}
+                   i++;
+               }
+           });
+           t.setRepeats(true);
+           t.start();
+
+           //}
 
             
         }
 
     }
-
-
-}

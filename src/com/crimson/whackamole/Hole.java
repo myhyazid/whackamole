@@ -3,23 +3,13 @@ package com.crimson.whackamole;
 public class Hole {
     private int ID;
     private POS position;
-    private float width;
-    private float height;
     private NPC occupant;
 
     public POS getPosition() {
         return position;
     }
-    public POS getID() {
-        return position;
-    }
-
-    public float getWidth() {
-        return width;
-    }
-
-    public float getHeight() {
-        return height;
+    public int getID() {
+        return ID;
     }
 
     public NPC getOccupant() {
@@ -30,14 +20,6 @@ public class Hole {
         this.position = position;
     }
 
-    public void setWidth(float width) {
-        this.width = width;
-    }
-
-    public void setHeight(float height) {
-        this.height = height;
-    }
-
 
     public void setOccupant(NPC occupant) {
         this.occupant = occupant;
@@ -45,4 +27,6 @@ public class Hole {
     public void setID(int guid) {
         ID = guid;
     }
+
+
 }
