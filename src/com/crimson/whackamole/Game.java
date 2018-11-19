@@ -34,14 +34,15 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import static javafx.scene.input.KeyCode.H;
 import static javafx.scene.input.KeyCode.S;
 
 public class Game{
     private String HighScore = "0";
-    public static int score=0;
+    public static int score =0;
     String timeleft = null;
 
-    Label lblScore = new Label("Score : " + score);
+    public Label lblScore = new Label();
 
 
     public String getHighScore() {
@@ -75,10 +76,10 @@ public class Game{
         GridPane gpGame = new GridPane();
         stage.setTitle("Crimson Whackamole! Game");
         gpGame.setHgap(10);
+        stage.centerOnScreen();
         gpGame.setVgap(10);
         gpGame.setTranslateY(100.0);
         gpGame.setAlignment(Pos.CENTER);
-
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(30);
         ColumnConstraints column2 = new ColumnConstraints();
@@ -102,7 +103,7 @@ public class Game{
         gpGame.setStyle("-fx-background-color: red;");
 
         //Header
-
+        lblScore.setText("Score : " + score);
         CountdownTimer FTM = new CountdownTimer();
         Label lblTimer = new Label("Time Left : ");
         Button btnPause = new Button("Pause ☰");
@@ -263,22 +264,17 @@ public class Game{
                             if (result.get() == ButtonType.OK) {
                                 timeleft = null;
 
-                                try (BufferedWriter outWrite = new BufferedWriter(new FileWriter("C:\\Users\\myhyazid\\Desktop\\Bachelor Of Technology\\Sem 2\\OOP Submission\\whackamole\\src\\com\\crimson\\whackamole\\HighScore.txt"))){
-                                    outWrite.write(Integer.toString(score));
-                                    outWrite.flush();
+                                if (score >= Integer.parseInt(HighScore)) {
+                                    try (BufferedWriter outWrite = new BufferedWriter(new FileWriter("C:\\Users\\myhyazid\\Desktop\\Bachelor Of Technology\\Sem 2\\OOP Submission\\whackamole\\src\\com\\crimson\\whackamole\\HighScore.txt"))) {
+                                        outWrite.write(Integer.toString(score));
+                                        outWrite.flush();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                                catch (IOException e){
-                                    e.printStackTrace();
-                                }
-
-
-
-
-
-                                Main main = new Main();
-
-                                System.out.println(main.mainPos);
-                                // Hide this current window (if this is what you want)
+                                //Platform.setImplicitExit(false);
+                                stage.hide();
+                            // Hide this current window (if this is what you want)
                                 //((Node)(event.getSource())).getScene().getWindow().hide();
                                 // ... user chose OK
                             }
