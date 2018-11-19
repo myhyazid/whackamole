@@ -38,7 +38,7 @@ import static javafx.scene.input.KeyCode.S;
 
 public class Game{
     private String HighScore = "0";
-    public int score;
+    public static int score=0;
     String timeleft = null;
 
     Label lblScore = new Label("Score : " + score);
@@ -73,7 +73,7 @@ public class Game{
         root.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
         GridPane gpHeader = new GridPane();
         GridPane gpGame = new GridPane();
-        stage.setTitle("My New Stage Title");
+        stage.setTitle("Crimson Whackamole! Game");
         gpGame.setHgap(10);
         gpGame.setVgap(10);
         gpGame.setTranslateY(100.0);
@@ -133,8 +133,8 @@ public class Game{
            // boolean repeat;
 
         initGameGUI(gpGame,FTM);
-
     }
+
     public void initGameGUI(GridPane gpGame, CountdownTimer FTM){
         GroupofHoles goh = new GroupofHoles();
         for (int i=0;i<4;i++){
@@ -292,6 +292,7 @@ public class Game{
 
 
         check.start();
+
     }
 
 
@@ -339,20 +340,27 @@ public class Game{
     private void pressedButton(int id,GroupofHoles goh) {
         int val = goh.getListofHoles(id).getOccupant().getID();
 
-        //if val is 0 = Normal Mole
-        //if val is 1 = Special Mole
-        //if val is 2 = Timebomb
-        //if val is 3 = empty hole
 
-        if (val == 0) {
-            score++;
-        } else if (val == 1) { //val==0
-            score = score + 10;
-        } else {
-            score--;
-        }
-System.out.println("Score : "+ score);
-        lblScore.setText("Score : " + score); //update the score
+                //if val is 0 = Normal Mole
+                //if val is 1 = Special Mole
+                //if val is 2 = Timebomb
+                //if val is 3 = empty hole
+
+                if (val == 0) {
+                    score++;
+                } else if (val == 1) { //val==0
+                    score = score + 10;
+                } else {
+                    score--;
+                }
+
+                System.out.println("Score : "+ score);
+                lblScore.setText("Score : " + score); //update the score
+
+
+
+
+
     }
 }
 
