@@ -23,11 +23,11 @@ import javafx.stage.Stage;
 import java.util.Optional;
 
 public class Main extends Application {
-
+    public String mainPos;
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        
+
         // Layout declaration
         GridPane gp = new GridPane();
         Scene sc = new Scene(gp,1366,768, Color.WHITE);
@@ -60,6 +60,7 @@ public class Main extends Application {
                 g.stage.show();
                 g.initGUI();
                 // Hide this current window (if this is what you want)
+                mainPos = ((Node)(event.getSource())).getScene().getWindow().toString();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
