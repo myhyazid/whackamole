@@ -287,11 +287,8 @@ public class Game{
 
                                     }
                                 });*/
-                                Main m = new Main();
-
                                 Platform.setImplicitExit(false);
                                 stage.close();
-                               m.setHS("Current High Score :  " + getHighScore());
                             // Hide this current window (if this is what you want)
                                 //(Node)(event.getSource())).getScene().getWindow().hide();
                                 // ... user chose OK

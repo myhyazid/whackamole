@@ -26,7 +26,7 @@ import java.util.Optional;
 
 public class Main extends Application {
     public String mainPos;
-    public String HS;
+  //  public String HS;
 
 
     @Override
@@ -75,10 +75,11 @@ public class Main extends Application {
 
         g.stage.setOnHidden(new EventHandler<WindowEvent>() {
             @Override
-            public void handle(WindowEvent event) {
+            public void handle(WindowEvent event) {  // Jangan Kacau dlm ni
 
                 primaryStage.show();
-                lbHS.setText(HS);
+                //lbHS.setText(HS);
+                restart(primaryStage);
                 // Platform.setImplicitExit(true);
                 // Platform.exit();
                 //g.stage.close();
@@ -109,8 +110,12 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public void setHS(String HS) {
-        this.HS = HS;
+    void restart(Stage stage) {
+        try {
+            start(stage);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
