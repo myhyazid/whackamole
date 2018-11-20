@@ -69,6 +69,7 @@ public class NPC  {
             Image image = new Image(getClass().getResourceAsStream("sprites/NPC2-128x128.png"),128,128,false,false);
             //Label lb = new Label();
             lb.setGraphic(new ImageView(image));
+
         }
         else {
             Image image = new Image(getClass().getResourceAsStream("sprites/Hole-128x128.png"));
@@ -78,6 +79,7 @@ public class NPC  {
 
         gpGame.add(lb,goh.getListofHoles(randHole).getPosition().getX(),goh.getListofHoles(randHole).getPosition().getY(),1,1);
         Game g = new Game();
+        g.lblScore.setText("Score : " + score);
         g.initEvents(goh,lb,randNPC,gpGame);
 
     }

@@ -26,11 +26,12 @@ import java.util.Optional;
 
 public class Main extends Application {
     public String mainPos;
+    public String HS;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-
         // Layout declaration
         GridPane gp = new GridPane();
         Scene sc = new Scene(gp, 1366, 768, Color.WHITE);
@@ -42,14 +43,15 @@ public class Main extends Application {
         // Layout element
         Image image = new Image(getClass().getResourceAsStream("sprites/64x64.png"));
         Label lb = new Label(" Whack-a-mole");
+        Label lbHS = new Label();
         lb.setGraphic(new ImageView(image));
         lb.setFont(new Font("Comic-Sans", 36));
 
         Button btn = new Button("Play Now!");
 
         Game g = new Game();
-        Label lb2 = new Label("Current High Score :  " + g.getHighScore());
-        lb2.setFont(new Font(22));
+        lbHS.setText("Current High Score :  " + g.getHighScore());
+        lbHS.setFont(new Font(22));
 
         // Layout behaviour
         //btn.setText("Submit");
@@ -69,16 +71,20 @@ public class Main extends Application {
             }
         });
 
-        g.stage.setOnHiding(new EventHandler<WindowEvent>() {
+
+
+        g.stage.setOnHidden(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
+
                 primaryStage.show();
+                lbHS.setText(HS);
                 // Platform.setImplicitExit(true);
                 // Platform.exit();
-                //g.stage.hide();
+                //g.stage.close();
+
             }
         });
-
 
 
 
@@ -86,6 +92,7 @@ public class Main extends Application {
             @Override
             public void handle(WindowEvent event) {
                 Platform.exit();
+                System.exit(0);
             }
         });
 
@@ -95,14 +102,16 @@ public class Main extends Application {
         //gp.add(tf,1,0,1,1);
         gp.add(btn, 0, 1, 1, 1);
         // gp.add(tf2,1,1,1,1);
-        gp.add(lb2, 0, 2, 1, 1);
+        gp.add(lbHS, 0, 2, 1, 1);
         // gp.add(btn2,1,2,1,1);
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(sc);
         primaryStage.show();
     }
 
-
+    public void setHS(String HS) {
+        this.HS = HS;
+    }
 
     public static void main(String[] args) {
         launch(args);

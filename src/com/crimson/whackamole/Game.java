@@ -3,8 +3,15 @@ package com.crimson.whackamole;
 import com.sun.istack.internal.Nullable;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -21,6 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -34,14 +42,11 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import static javafx.scene.input.KeyCode.H;
-import static javafx.scene.input.KeyCode.S;
 
 public class Game{
     private String HighScore = "0";
     public static int score =0;
     String timeleft = null;
-
     public Label lblScore = new Label();
 
 
@@ -219,13 +224,15 @@ public class Game{
 
                         NPC mole = new NPC();
                         mole.genRandMole(gpGame,goh,gon,randHole,randNPC);
+                        lblScore.setText("Score : " + score);
+
                        // initEvents(goh);
                         //javaFX operations should go here
                     }
                 });
 
 
-                if(i>25){t.stop();}
+                if(i>27){t.stop();}
                 i++;
             }
 
@@ -247,11 +254,11 @@ public class Game{
 
 
                 }
-
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
                         //System.out.println("Check : " + timeleft);
+
                         if (timeleft.equals("0")) {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Time's Out");
@@ -272,19 +279,33 @@ public class Game{
                                         e.printStackTrace();
                                     }
                                 }
+
                                 //Platform.setImplicitExit(false);
-                                stage.hide();
+                                /*stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                                    @Override
+                                    public void handle(WindowEvent event) {
+
+                                    }
+                                });*/
+                                Main m = new Main();
+
+                                Platform.setImplicitExit(false);
+                                stage.close();
+                               m.setHS("Current High Score :  " + getHighScore());
                             // Hide this current window (if this is what you want)
-                                //((Node)(event.getSource())).getScene().getWindow().hide();
+                                //(Node)(event.getSource())).getScene().getWindow().hide();
                                 // ... user chose OK
                             }
 
                         }
                     }
                 });
-
+                //new Main().callMain();
             } // thread
         }); // thread
+
+
+
 
 
         check.start();
@@ -294,7 +315,6 @@ public class Game{
 
 
 
-    int ic;
     int id;
     public void initEvents(GroupofHoles goh, Label lb,int randNPC, GridPane gpGame){
 
@@ -350,11 +370,7 @@ public class Game{
                     score--;
                 }
 
-                System.out.println("Score : "+ score);
-                lblScore.setText("Score : " + score); //update the score
-
-
-
+                lblScore.setText("Score : " + score);
 
 
     }
