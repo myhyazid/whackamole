@@ -111,7 +111,7 @@ public class Game{
         lblScore.setText("Score : " + score);
         CountdownTimer FTM = new CountdownTimer();
         Label lblTimer = new Label("Time Left : ");
-        Button btnPause = new Button("Pause ☰");
+        Button btnExit = new Button("Exit ☰");
         lblScore.setTextFill(Color.RED);
         lblScore.setStyle("-fx-font-size: 4em;");
 
@@ -119,21 +119,22 @@ public class Game{
         lblTimer.setStyle("-fx-font-size: 4em;");
         lblTimer.setAlignment(Pos.CENTER);
 
-        btnPause.setAlignment(Pos.CENTER_RIGHT);
-        btnPause.setStyle("-fx-font-size: 3em;");
+        btnExit.setAlignment(Pos.CENTER_RIGHT);
+        btnExit.setStyle("-fx-font-size: 3em;");
 
-       // btnPause.setStyle("-fx-font-size: 4em;");
-        btnPause.setOnAction(new EventHandler<ActionEvent>() {
+       // btnExit.setStyle("-fx-font-size: 4em;");
+        btnExit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hi");
+                stage.close();
+
             }
         });
         FTM.callCountDown();
         gpHeader.add(lblScore,0,0,1,1);
         gpHeader.add(lblTimer,1,0,1,1);
         gpHeader.add(FTM.timerLabel,2,0,1,1);
-        gpHeader.add(btnPause,3,0,1,1);
+        gpHeader.add(btnExit,3,0,1,1);
 
       // for (int i=0;i<16;i++) {
            // boolean repeat;
