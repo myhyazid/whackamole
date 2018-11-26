@@ -289,6 +289,7 @@ public class Game{
                                     }
                                 });*/
                                 Platform.setImplicitExit(false);
+                                score=0;
                                 stage.close();
                             // Hide this current window (if this is what you want)
                                 //(Node)(event.getSource())).getScene().getWindow().hide();
@@ -343,7 +344,7 @@ public class Game{
                             try {
                                 reset.clearBoard(lb, gpGame, colIndex, rowIndex);
                             } catch (IllegalArgumentException k){
-                               k.printStackTrace();
+                               //hide exception msg
                             }
 
                         }
